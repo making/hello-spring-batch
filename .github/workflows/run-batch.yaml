@@ -15,9 +15,6 @@ jobs:
     - name: Build the jar file
       run: ./mvnw -V --no-transfer-progress clean package -DskipTests
     - name: Run the jar file
-      env:
-        MANAGEMENT_OTLP_LOGGING_ENDPOINT: ${{ secrets.MANAGEMENT_OTLP_LOGGING_ENDPOINT }}
-        MANAGEMENT_OTLP_LOGGING_HEADERS_AUTHORIZATION: ${{ secrets.MANAGEMENT_OTLP_LOGGING_HEADERS_AUTHORIZATION }}
       run: |
         if [ -n "${{ secrets.MANAGEMENT_OTLP_LOGGING_ENDPOINT }}" ]; then
             export MANAGEMENT_OTLP_LOGGING_ENDPOINT=${{ secrets.MANAGEMENT_OTLP_LOGGING_ENDPOINT }}
