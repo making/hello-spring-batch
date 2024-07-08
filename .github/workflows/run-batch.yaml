@@ -17,9 +17,9 @@ jobs:
     - name: Run the jar file
       run: |
         if [ -n "${{ secrets.MANAGEMENT_OTLP_LOGGING_ENDPOINT }}" ]; then
-            export MANAGEMENT_OTLP_LOGGING_ENDPOINT=${{ secrets.MANAGEMENT_OTLP_LOGGING_ENDPOINT }}
+            export MANAGEMENT_OTLP_LOGGING_ENDPOINT="${{ secrets.MANAGEMENT_OTLP_LOGGING_ENDPOINT }}"
         fi
         if [ -n "${{ secrets.MANAGEMENT_OTLP_LOGGING_HEADERS_AUTHORIZATION }}" ]; then
-            export MANAGEMENT_OTLP_LOGGING_HEADERS_AUTHORIZATION=${{ secrets.MANAGEMENT_OTLP_LOGGING_HEADERS_AUTHORIZATION }}
+            export MANAGEMENT_OTLP_LOGGING_HEADERS_AUTHORIZATION="${{ secrets.MANAGEMENT_OTLP_LOGGING_HEADERS_AUTHORIZATION }}"
         fi
         java -jar target/*.jar
