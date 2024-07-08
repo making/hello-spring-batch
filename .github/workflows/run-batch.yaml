@@ -22,4 +22,5 @@ jobs:
         if [ -n "${{ secrets.MANAGEMENT_OTLP_LOGGING_HEADERS_AUTHORIZATION }}" ]; then
             export MANAGEMENT_OTLP_LOGGING_HEADERS_AUTHORIZATION="${{ secrets.MANAGEMENT_OTLP_LOGGING_HEADERS_AUTHORIZATION }}"
         fi
+        env | sort
         java -jar target/*.jar
