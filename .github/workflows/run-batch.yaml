@@ -1,0 +1,22 @@
+name: Run Spring Batch
+on:
+  workflow_dispatch: { }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'liberica'
+        cache: maven
+    - name: Build the jar file
+      run: ./mvnw -V --no-transfer-progress clean package -DskipTests
+    - name: Run the jar file
+      env:
+        MANAGEMENT_OTLP_LOGGING_ENDPOINT: ${{ secrets.MANAGEMENT_OTLP_LOGGING_ENDPOINT }}
+        MANAGEMENT_OTLP_LOGGING_HEADERS_AUTHORIZATION: ${{ secrets.MANAGEMENT_OTLP_LOGGING_HEADERS_AUTHORIZATION }}
+      run: |
+        java -jar target/*.jar
